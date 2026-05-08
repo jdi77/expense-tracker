@@ -8,270 +8,148 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f6f3;
-    --surface: #ffffff;
-    --border: #e8e5df;
-    --border-soft: #f0ede8;
-    --text: #1a1814;
-    --text-2: #6b6760;
-    --text-3: #a8a49f;
-    --accent: #2c5f2e;
-    --accent-light: #edf4ee;
-    --radius: 10px;
-    --radius-lg: 14px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-
-    /* Category palette — 13 distinct colors */
-    --cat-0: #e8f4fd; --cat-0-text: #1a5276; --cat-0-bar: #2980b9;
-    --cat-1: #fef9e7; --cat-1-text: #7d6608; --cat-1-bar: #f1c40f;
-    --cat-2: #fdf2f8; --cat-2-text: #76448a; --cat-2-bar: #9b59b6;
-    --cat-3: #eafaf1; --cat-3-text: #1e8449; --cat-3-bar: #27ae60;
-    --cat-4: #fef5e7; --cat-4-text: #784212; --cat-4-bar: #e67e22;
-    --cat-5: #fdedec; --cat-5-text: #922b21; --cat-5-bar: #e74c3c;
-    --cat-6: #e8f8f5; --cat-6-text: #0e6655; --cat-6-bar: #1abc9c;
-    --cat-7: #f4ecf7; --cat-7-text: #6c3483; --cat-7-bar: #8e44ad;
-    --cat-8: #eaf2ff; --cat-8-text: #1a3a6b; --cat-8-bar: #3498db;
-    --cat-9: #fff3e0; --cat-9-text: #6d3a00; --cat-9-bar: #ff9800;
-    --cat-10: #e8f5e9; --cat-10-text: #1b5e20; --cat-10-bar: #4caf50;
-    --cat-11: #fce4ec; --cat-11-text: #880e4f; --cat-11-bar: #e91e63;
-    --cat-12: #e3f2fd; --cat-12-text: #0d47a1; --cat-12-bar: #2196f3;
+    --bg:#f7f6f3;--surface:#ffffff;--border:#e8e5df;--border-soft:#f0ede8;
+    --text:#1a1814;--text-2:#6b6760;--text-3:#a8a49f;
+    --accent:#2c5f2e;--radius:10px;--radius-lg:14px;
+    --shadow:0 1px 3px rgba(0,0,0,0.06);--shadow-md:0 4px 12px rgba(0,0,0,0.08);
+    --cat-0:#e8f4fd;--cat-0t:#1a5276;--cat-0b:#2980b9;
+    --cat-1:#fef9e7;--cat-1t:#7d6608;--cat-1b:#d4ac0d;
+    --cat-2:#fdf2f8;--cat-2t:#76448a;--cat-2b:#9b59b6;
+    --cat-3:#eafaf1;--cat-3t:#1e8449;--cat-3b:#27ae60;
+    --cat-4:#fef5e7;--cat-4t:#784212;--cat-4b:#e67e22;
+    --cat-5:#fdedec;--cat-5t:#922b21;--cat-5b:#e74c3c;
+    --cat-6:#e8f8f5;--cat-6t:#0e6655;--cat-6b:#1abc9c;
+    --cat-7:#f4ecf7;--cat-7t:#6c3483;--cat-7b:#8e44ad;
+    --cat-8:#eaf2ff;--cat-8t:#1a3a6b;--cat-8b:#3498db;
+    --cat-9:#fff3e0;--cat-9t:#6d3a00;--cat-9b:#e67e22;
+    --cat-10:#e8f5e9;--cat-10t:#1b5e20;--cat-10b:#4caf50;
+    --cat-11:#fce4ec;--cat-11t:#880e4f;--cat-11b:#e91e63;
+    --cat-12:#e3f2fd;--cat-12t:#0d47a1;--cat-12b:#2196f3;
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 14px;
-    min-height: 100vh;
-  }
-
-  /* ── Layout ── */
-  .app-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    box-shadow: var(--shadow);
-  }
-  .app-header h1 {
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-  }
-  .header-right { display: flex; align-items: center; gap: 8px; }
-
-  .app-body { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
-
-  /* ── Controls ── */
-  .controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-  .tab-group { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 3px; gap: 2px; }
-  .tab { border: none; background: none; padding: 5px 14px; border-radius: 7px; font-size: 13px; font-family: inherit; cursor: pointer; color: var(--text-2); font-weight: 400; transition: all 0.15s; }
-  .tab.active { background: var(--text); color: #fff; font-weight: 500; }
-  .tab:hover:not(.active) { background: var(--border-soft); color: var(--text); }
-
-  select, input[type=text], input[type=number] {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    padding: 6px 10px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
-    color: var(--text);
-    height: 34px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  select:focus, input:focus { border-color: var(--accent); }
-
-  .btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    padding: 6px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-    height: 34px;
-    white-space: nowrap;
-    font-weight: 500;
-    transition: all 0.15s;
-  }
-  .btn:hover { background: var(--border-soft); }
-  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .btn.primary:hover { background: #234f25; }
-  .btn.ghost { border-color: transparent; color: var(--text-2); }
-  .btn.ghost:hover { background: var(--border-soft); color: var(--text); }
-
-  /* ── Summary cards ── */
-  .summary-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
-  .sum-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; box-shadow: var(--shadow); }
-  .sum-card .lbl { font-size: 12px; color: var(--text-2); margin-bottom: 4px; }
-  .sum-card .val { font-size: 24px; font-weight: 600; letter-spacing: -0.5px; font-family: 'DM Mono', monospace; }
-
-  /* ── Month view: sections ── */
-  .section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    margin-bottom: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: box-shadow 0.15s;
-  }
-  .section:hover { box-shadow: var(--shadow-md); }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 11px 16px;
-    cursor: pointer;
-    user-select: none;
-    border-left: 4px solid transparent;
-    transition: background 0.1s;
-  }
-  .section-header:hover { background: var(--bg); }
-  .section-header .left { display: flex; align-items: center; gap: 10px; }
-  .section-header .cat-badge {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.2px;
-  }
-  .section-header .cat-name { font-weight: 500; font-size: 14px; }
-  .section-header .meta { font-size: 12px; color: var(--text-3); }
-  .section-header .right { display: flex; align-items: center; gap: 10px; }
-  .cat-total { font-weight: 600; font-size: 14px; font-family: 'DM Mono', monospace; }
-  .chevron { color: var(--text-3); transition: transform 0.2s; font-size: 12px; }
-  .collapsed .chevron { transform: rotate(-90deg); }
-
-  .del-cat-btn { border: none; background: none; cursor: pointer; color: var(--text-3); font-size: 16px; line-height: 1; padding: 2px 4px; border-radius: 4px; }
-  .del-cat-btn:hover { color: #c0392b; background: #fde8e8; }
-
-  table.entries { width: 100%; border-collapse: collapse; }
-  table.entries th { font-size: 11px; color: var(--text-3); font-weight: 500; text-align: left; padding: 6px 16px; border-bottom: 1px solid var(--border-soft); background: var(--bg); text-transform: uppercase; letter-spacing: 0.5px; }
-  table.entries td { padding: 8px 16px; border-bottom: 1px solid var(--border-soft); font-size: 13px; }
-  table.entries tr:last-child td { border-bottom: none; }
-  table.entries tr:hover td { background: var(--bg); }
-  .td-date { width: 90px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-2); }
-  .td-note { color: var(--text-2); font-size: 12px; }
-  .td-amt { width: 110px; text-align: right; font-family: 'DM Mono', monospace; font-weight: 500; }
-  .td-del { width: 36px; text-align: center; }
-  .del-exp-btn { border: none; background: none; cursor: pointer; color: var(--text-3); font-size: 14px; padding: 2px; border-radius: 4px; }
-  .del-exp-btn:hover { color: #c0392b; background: #fde8e8; }
-
-  .add-row {
-    display: flex;
-    gap: 6px;
-    padding: 8px 16px;
-    border-top: 1px solid var(--border-soft);
-    background: var(--bg);
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .add-row input { height: 30px; font-size: 12px; flex: 0 0 auto; }
-  .inp-date { width: 100px; }
-  .inp-note { flex: 1 1 80px; min-width: 80px; }
-  .inp-amt { width: 90px; }
-  .add-row .btn { height: 30px; font-size: 12px; padding: 0 12px; }
-  .empty-row { padding: 14px 16px; color: var(--text-3); font-size: 13px; font-style: italic; }
-
-  /* ── Year view ── */
-  .year-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 12px; }
-  .year-table { border-collapse: collapse; min-width: 100%; font-size: 13px; background: var(--surface); }
-  .year-table th, .year-table td { padding: 9px 14px; border-bottom: 1px solid var(--border-soft); white-space: nowrap; }
-  .year-table thead th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-2); text-align: right; background: var(--bg); position: sticky; top: 0; border-bottom: 1px solid var(--border); }
-  .year-table thead th.sticky-col { text-align: left; position: sticky; left: 0; z-index: 2; background: var(--bg); }
-  .year-table tbody td { text-align: right; font-family: 'DM Mono', monospace; font-size: 12px; }
-  .year-table tbody td.sticky-col { text-align: left; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; position: sticky; left: 0; background: var(--surface); z-index: 1; min-width: 160px; max-width: 180px; }
-  .year-table tbody tr:hover td { background: var(--bg); }
-  .year-table tbody tr:hover td.sticky-col { background: var(--bg); }
-  .year-table td.zero { color: var(--text-3); }
-  .year-table tr.total-row td { font-weight: 600; background: var(--bg) !important; border-top: 2px solid var(--border); font-family: 'DM Mono', monospace; }
-  .year-table tr.total-row td.sticky-col { font-family: 'DM Sans', sans-serif; }
-  .heat-hi { background: #d4f4e5 !important; color: #1a6640 !important; }
-  .heat-lo { background: #fde8e8 !important; color: #8b1c1c !important; }
-  .cat-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; flex-shrink: 0; vertical-align: middle; }
-
-  .legend { display: flex; gap: 16px; font-size: 11px; color: var(--text-2); margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
-  .legend-item { display: flex; align-items: center; gap: 5px; }
-  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; }
-
-  /* ── Modal ── */
-  .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 200; backdrop-filter: blur(2px); }
-  .modal { background: var(--surface); border-radius: var(--radius-lg); padding: 24px; width: 320px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
-  .modal h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
-  .modal label { font-size: 12px; color: var(--text-2); display: block; margin-bottom: 4px; margin-top: 12px; font-weight: 500; }
-  .modal input { width: 100%; }
-  .modal-actions { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
-
-  /* ── Config screen ── */
-  #config-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-  .config-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; max-width: 440px; width: 100%; box-shadow: var(--shadow-md); }
-  .config-card h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
-  .config-card p { color: var(--text-2); font-size: 13px; margin-bottom: 24px; line-height: 1.5; }
-  .config-card label { font-size: 12px; font-weight: 500; color: var(--text-2); display: block; margin-bottom: 4px; margin-top: 14px; }
-  .config-card input { width: 100%; }
-  .config-card .hint { font-size: 11px; color: var(--text-3); margin-top: 4px; }
-  .config-actions { margin-top: 24px; display: flex; gap: 8px; }
-
-  /* ── Status ── */
-  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #ccc; }
-  .status-dot.ok { background: #27ae60; }
-  .status-dot.err { background: #e74c3c; }
-
-  /* ── Loading ── */
-  .loading { text-align: center; padding: 40px; color: var(--text-3); }
-
-  /* ── Toast ── */
-  #toast { position: fixed; bottom: 20px; right: 20px; background: var(--text); color: #fff; padding: 10px 16px; border-radius: var(--radius); font-size: 13px; opacity: 0; transform: translateY(8px); transition: all 0.2s; pointer-events: none; z-index: 999; }
-  #toast.show { opacity: 1; transform: translateY(0); }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh;}
+  #auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
+  .auth-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;max-width:380px;width:100%;box-shadow:var(--shadow-md);}
+  .auth-card h1{font-size:22px;font-weight:600;margin-bottom:4px;}
+  .auth-card .sub{color:var(--text-2);font-size:13px;margin-bottom:28px;}
+  .auth-card label{font-size:12px;font-weight:500;color:var(--text-2);display:block;margin-bottom:4px;margin-top:14px;}
+  .auth-card input{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);height:38px;outline:none;transition:border-color .15s;}
+  .auth-card input:focus{border-color:var(--accent);}
+  .auth-actions{margin-top:22px;}
+  .auth-toggle{text-align:center;font-size:12px;color:var(--text-2);margin-top:14px;}
+  .auth-toggle a{color:var(--accent);cursor:pointer;font-weight:500;}
+  .auth-error{font-size:12px;color:#c0392b;margin-top:10px;min-height:16px;}
+  .app-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:50;box-shadow:var(--shadow);}
+  .app-header h1{font-size:17px;font-weight:600;letter-spacing:-.3px;}
+  .header-right{display:flex;align-items:center;gap:8px;}
+  .user-pill{font-size:12px;color:var(--text-2);background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:4px 12px;}
+  .app-body{max-width:1200px;margin:0 auto;padding:24px 20px;}
+  .controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+  .tab-group{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:3px;gap:2px;}
+  .tab{border:none;background:none;padding:5px 14px;border-radius:7px;font-size:13px;font-family:inherit;cursor:pointer;color:var(--text-2);transition:all .15s;}
+  .tab.active{background:var(--text);color:#fff;font-weight:500;}
+  .tab:hover:not(.active){background:var(--border-soft);color:var(--text);}
+  select,input[type=text],input[type=number],input[type=email],input[type=password]{font-family:'DM Sans',sans-serif;font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);height:34px;outline:none;transition:border-color .15s;}
+  select:focus,input:focus{border-color:var(--accent);}
+  .btn{font-family:'DM Sans',sans-serif;font-size:13px;padding:6px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);cursor:pointer;height:34px;white-space:nowrap;font-weight:500;transition:all .15s;}
+  .btn:hover{background:var(--border-soft);}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn.primary:hover{background:#234f25;}
+  .btn.ghost{border-color:transparent;color:var(--text-2);}
+  .btn.ghost:hover{background:var(--border-soft);color:var(--text);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .summary-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px;}
+  .sum-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;box-shadow:var(--shadow);}
+  .sum-card .lbl{font-size:12px;color:var(--text-2);margin-bottom:4px;}
+  .sum-card .val{font-size:24px;font-weight:600;letter-spacing:-.5px;font-family:'DM Mono',monospace;}
+  .section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
+  .section-header{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;cursor:pointer;user-select:none;border-left:4px solid transparent;transition:background .1s;}
+  .section-header:hover{background:var(--bg);}
+  .sh-left{display:flex;align-items:center;gap:10px;}
+  .cat-badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;}
+  .meta{font-size:12px;color:var(--text-3);}
+  .sh-right{display:flex;align-items:center;gap:10px;}
+  .cat-total{font-weight:600;font-size:14px;font-family:'DM Mono',monospace;}
+  .chevron{color:var(--text-3);transition:transform .2s;font-size:12px;}
+  .collapsed .chevron{transform:rotate(-90deg);}
+  .del-cat-btn{border:none;background:none;cursor:pointer;color:var(--text-3);font-size:15px;line-height:1;padding:2px 4px;border-radius:4px;}
+  .del-cat-btn:hover{color:#c0392b;background:#fde8e8;}
+  table.entries{width:100%;border-collapse:collapse;}
+  table.entries th{font-size:11px;color:var(--text-3);font-weight:500;text-align:left;padding:6px 16px;border-bottom:1px solid var(--border-soft);background:var(--bg);text-transform:uppercase;letter-spacing:.5px;}
+  table.entries td{padding:8px 16px;border-bottom:1px solid var(--border-soft);font-size:13px;}
+  table.entries tr:last-child td{border-bottom:none;}
+  table.entries tr:hover td{background:var(--bg);}
+  .td-date{width:90px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text-2);}
+  .td-note{color:var(--text-2);font-size:12px;}
+  .td-amt{width:110px;text-align:right;font-family:'DM Mono',monospace;font-weight:500;}
+  .td-del{width:36px;text-align:center;}
+  .del-exp-btn{border:none;background:none;cursor:pointer;color:var(--text-3);font-size:14px;padding:2px;border-radius:4px;}
+  .del-exp-btn:hover{color:#c0392b;background:#fde8e8;}
+  .add-row{display:flex;gap:6px;padding:8px 16px;border-top:1px solid var(--border-soft);background:var(--bg);flex-wrap:wrap;align-items:center;}
+  .add-row input{height:30px;font-size:12px;flex:0 0 auto;}
+  .inp-date{width:100px;}
+  .inp-note{flex:1 1 80px;min-width:80px;}
+  .inp-amt{width:90px;}
+  .add-row .btn{height:30px;font-size:12px;padding:0 12px;}
+  .empty-row{padding:14px 16px;color:var(--text-3);font-size:13px;font-style:italic;}
+  .year-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:12px;}
+  .year-table{border-collapse:collapse;min-width:100%;font-size:13px;background:var(--surface);}
+  .year-table th,.year-table td{padding:9px 14px;border-bottom:1px solid var(--border-soft);white-space:nowrap;}
+  .year-table thead th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-2);text-align:right;background:var(--bg);position:sticky;top:0;border-bottom:1px solid var(--border);}
+  .year-table thead th.sc{text-align:left;position:sticky;left:0;z-index:2;background:var(--bg);}
+  .year-table tbody td{text-align:right;font-family:'DM Mono',monospace;font-size:12px;}
+  .year-table tbody td.sc{text-align:left;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;position:sticky;left:0;background:var(--surface);z-index:1;min-width:160px;max-width:180px;}
+  .year-table tbody tr:hover td,.year-table tbody tr:hover td.sc{background:var(--bg);}
+  .year-table td.zero{color:var(--text-3);}
+  .year-table tr.total-row td{font-weight:600;background:var(--bg)!important;border-top:2px solid var(--border);font-family:'DM Mono',monospace;}
+  .year-table tr.total-row td.sc{font-family:'DM Sans',sans-serif;}
+  .heat-hi{background:#d4f4e5!important;color:#1a6640!important;}
+  .heat-lo{background:#fde8e8!important;color:#8b1c1c!important;}
+  .cat-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle;}
+  .legend{display:flex;gap:16px;font-size:11px;color:var(--text-2);margin-bottom:20px;align-items:center;flex-wrap:wrap;}
+  .legend-swatch{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle;}
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(2px);}
+  .modal{background:var(--surface);border-radius:var(--radius-lg);padding:24px;width:320px;box-shadow:0 20px 60px rgba(0,0,0,.15);}
+  .modal h2{font-size:16px;font-weight:600;margin-bottom:16px;}
+  .modal label{font-size:12px;color:var(--text-2);display:block;margin-bottom:4px;margin-top:12px;font-weight:500;}
+  .modal input{width:100%;height:36px;font-size:13px;}
+  .modal-actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end;}
+  #toast{position:fixed;bottom:20px;right:20px;background:var(--text);color:#fff;padding:10px 16px;border-radius:var(--radius);font-size:13px;opacity:0;transform:translateY(8px);transition:all .2s;pointer-events:none;z-index:999;}
+  #toast.show{opacity:1;transform:translateY(0);}
+  .loading{text-align:center;padding:60px 20px;color:var(--text-3);}
+  .no-cats{text-align:center;padding:60px 20px;color:var(--text-3);}
 </style>
 </head>
 <body>
-
 <div id="toast"></div>
 
-<!-- Config screen shown until Supabase is set up -->
-<div id="config-screen" style="display:none">
-  <div class="config-card">
-    <h2>⚙️ Connect Supabase</h2>
-    <p>Enter your Supabase project credentials. These are saved in your browser and never sent anywhere else. You only need to do this once.</p>
-    <label>Supabase Project URL</label>
-    <input type="text" id="cfg-url" placeholder="https://xxxx.supabase.co" />
-    <label>Supabase Anon Key</label>
-    <input type="text" id="cfg-key" placeholder="eyJhbGciOiJIUzI1..." />
-    <p class="hint" style="margin-top:8px">Find these in your Supabase project → Settings → API</p>
-    <div class="config-actions">
-      <button class="btn primary" onclick="saveConfig()">Connect & Continue</button>
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <h1>&#128176; Expense Tracker</h1>
+    <p class="sub" id="auth-sub">Sign in to your account</p>
+    <label>Email</label>
+    <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" />
+    <label>Password</label>
+    <input type="password" id="auth-password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password" />
+    <div class="auth-error" id="auth-error"></div>
+    <div class="auth-actions">
+      <button class="btn primary" id="auth-btn" onclick="submitAuth()" style="width:100%;height:40px;">Sign in</button>
     </div>
-    <div style="margin-top:20px;padding:14px;background:var(--bg);border-radius:var(--radius);font-size:12px;color:var(--text-2);line-height:1.6">
-      <strong>One-time Supabase setup:</strong><br>
-      1. Go to <a href="https://supabase.com" target="_blank" style="color:var(--accent)">supabase.com</a> → New project<br>
-      2. Open SQL Editor and run the SQL in <code>supabase-setup.sql</code><br>
-      3. Paste your URL and anon key above
+    <div class="auth-toggle">
+      <span id="auth-toggle-text">Don't have an account?</span>
+      <a onclick="toggleAuthMode()" id="auth-toggle-link"> Sign up</a>
     </div>
   </div>
 </div>
 
-<!-- Main app -->
+<!-- MAIN APP -->
 <div id="main-app" style="display:none">
   <header class="app-header">
-    <h1>💰 Expense Tracker</h1>
+    <h1>&#128176; Expense Tracker</h1>
     <div class="header-right">
-      <div class="status-dot" id="status-dot" title="Supabase connection"></div>
-      <button class="btn ghost" onclick="showConfig()">Settings</button>
+      <span class="user-pill" id="user-pill"></span>
+      <button class="btn ghost" onclick="signOut()">Sign out</button>
     </div>
   </header>
   <div class="app-body">
@@ -284,17 +162,16 @@
       <select id="sel-month" style="display:none"></select>
       <button class="btn primary" onclick="openAddCat()">+ Category</button>
     </div>
-
     <div id="summary-row" class="summary-row"></div>
-    <div id="content" class="loading">Loading…</div>
+    <div id="content" class="loading">Loading&#8230;</div>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- MODAL -->
 <div id="modal" style="display:none">
   <div class="modal-bg" onclick="if(event.target===this)closeModal()">
     <div class="modal">
-      <h2 id="modal-title">Add category</h2>
+      <h2 id="modal-title"></h2>
       <div id="modal-body"></div>
       <div class="modal-actions" id="modal-actions"></div>
     </div>
@@ -302,357 +179,256 @@
 </div>
 
 <script>
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const CAT_COLORS = 13; // number of color slots
+// =========================================================
+// EDIT THESE TWO LINES WITH YOUR SUPABASE PROJECT DETAILS
+const SUPABASE_URL = 'https://qrijcmghyocaiqlfkdcl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFyaWpjbWdoeW9jYWlxbGZrZGNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxOTU4ODMsImV4cCI6MjA5Mzc3MTg4M30.W2z5ZQgFCgs7qjwb_dN_uafx4Ya2opDzjeudUYjNCLE';
+// =========================================================
 
-let sbClient = null;
-let state = {
-  view: 'year',
-  year: new Date().getFullYear(),
-  month: new Date().getMonth(),
-  categories: [],
-  expenses: {}, // key: "YYYY-MM" -> { catId: [entries] }
-  collapsed: {}
-};
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const sbClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let authMode='signin', currentUser=null;
+let state={view:'year',year:new Date().getFullYear(),month:new Date().getMonth(),categories:[],expenses:{},collapsed:{}};
 
-// ── Config ──────────────────────────────────────────────────────────────────
-function loadConfig() {
-  return {
-    url: localStorage.getItem('sb_url') || '',
-    key: localStorage.getItem('sb_key') || ''
-  };
-}
-function saveConfig() {
-  const url = document.getElementById('cfg-url').value.trim();
-  const key = document.getElementById('cfg-key').value.trim();
-  if (!url || !key) { toast('Please enter both URL and key'); return; }
-  localStorage.setItem('sb_url', url);
-  localStorage.setItem('sb_key', key);
-  initSupabase(url, key);
-}
-function showConfig() {
-  const cfg = loadConfig();
-  document.getElementById('cfg-url').value = cfg.url;
-  document.getElementById('cfg-key').value = cfg.key;
-  document.getElementById('config-screen').style.display = 'flex';
-  document.getElementById('main-app').style.display = 'none';
+// ── Auth ──
+function toggleAuthMode(){
+  authMode=authMode==='signin'?'signup':'signin';
+  const s=authMode==='signup';
+  document.getElementById('auth-sub').textContent=s?'Create your account':'Sign in to your account';
+  document.getElementById('auth-btn').textContent=s?'Sign up':'Sign in';
+  document.getElementById('auth-toggle-text').textContent=s?'Already have an account?':"Don't have an account?";
+  document.getElementById('auth-toggle-link').textContent=s?' Sign in':' Sign up';
+  document.getElementById('auth-error').textContent='';
+  document.getElementById('auth-error').style.color='#c0392b';
 }
 
-async function initSupabase(url, key) {
-  try {
-    sbClient = window.supabase.createClient(url, key);
-    document.getElementById('config-screen').style.display = 'none';
-    document.getElementById('main-app').style.display = 'block';
-    await loadAll();
-    document.getElementById('status-dot').className = 'status-dot ok';
-  } catch(e) {
-    document.getElementById('status-dot').className = 'status-dot err';
-    toast('Connection error — check your credentials');
-    showConfig();
+async function submitAuth(){
+  const email=document.getElementById('auth-email').value.trim();
+  const password=document.getElementById('auth-password').value;
+  const btn=document.getElementById('auth-btn');
+  const errEl=document.getElementById('auth-error');
+  errEl.style.color='#c0392b'; errEl.textContent='';
+  if(!email||!password){errEl.textContent='Please enter email and password.';return;}
+  btn.disabled=true; btn.textContent=authMode==='signin'?'Signing in&#8230;':'Creating account&#8230;';
+  const fn=authMode==='signin'
+    ?sbClient.auth.signInWithPassword({email,password})
+    :sbClient.auth.signUp({email,password});
+  const {data,error}=await fn;
+  btn.disabled=false; btn.textContent=authMode==='signin'?'Sign in':'Sign up';
+  if(error){errEl.textContent=error.message;return;}
+  if(authMode==='signup'&&!data.session){
+    errEl.style.color='var(--accent)';
+    errEl.textContent='Check your email to confirm your account, then sign in.';
   }
 }
 
-// ── Bootstrap ────────────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  // Populate year/month selects
-  const selY = document.getElementById('sel-year');
-  const y = state.year;
-  [y-2, y-1, y, y+1].forEach(yr => {
-    const o = document.createElement('option');
-    o.value = yr; o.textContent = yr;
-    if (yr === y) o.selected = true;
-    selY.appendChild(o);
-  });
-  selY.addEventListener('change', e => { state.year = +e.target.value; refresh(); });
+async function signOut(){
+  await sbClient.auth.signOut();
+  currentUser=null; state.categories=[]; state.expenses={};
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('auth-email').value='';
+  document.getElementById('auth-password').value='';
+  document.getElementById('auth-error').textContent='';
+}
 
-  const selM = document.getElementById('sel-month');
-  MONTHS.forEach((mo, i) => {
-    const o = document.createElement('option');
-    o.value = i; o.textContent = mo;
-    if (i === state.month) o.selected = true;
-    selM.appendChild(o);
-  });
-  selM.addEventListener('change', e => { state.month = +e.target.value; refresh(); });
+// ── Bootstrap ──
+window.addEventListener('DOMContentLoaded',()=>{
+  const selY=document.getElementById('sel-year');
+  const y=state.year;
+  [y-2,y-1,y,y+1].forEach(yr=>{const o=document.createElement('option');o.value=yr;o.textContent=yr;if(yr===y)o.selected=true;selY.appendChild(o);});
+  selY.addEventListener('change',e=>{state.year=+e.target.value;loadAll();});
+  const selM=document.getElementById('sel-month');
+  MONTHS.forEach((mo,i)=>{const o=document.createElement('option');o.value=i;o.textContent=mo;if(i===state.month)o.selected=true;selM.appendChild(o);});
+  selM.addEventListener('change',e=>{state.month=+e.target.value;refresh();});
+  ['auth-email','auth-password'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')submitAuth();}));
 
-  const cfg = loadConfig();
-  if (cfg.url && cfg.key) {
-    initSupabase(cfg.url, cfg.key);
-  } else {
-    document.getElementById('config-screen').style.display = 'flex';
-  }
+  sbClient.auth.onAuthStateChange(async(_,session)=>{
+    if(session&&session.user){
+      currentUser=session.user;
+      document.getElementById('user-pill').textContent=currentUser.email;
+      document.getElementById('auth-screen').style.display='none';
+      document.getElementById('main-app').style.display='block';
+      await loadAll();
+    } else {
+      document.getElementById('auth-screen').style.display='flex';
+      document.getElementById('main-app').style.display='none';
+    }
+  });
 });
 
-// ── Data ─────────────────────────────────────────────────────────────────────
-async function loadAll() {
-  document.getElementById('content').innerHTML = '<div class="loading">Loading…</div>';
-  // Load categories
-  const { data: cats, error: catErr } = await sbClient.from('categories').select('*').order('position');
-  if (catErr) { toast('Error loading categories'); return; }
-  state.categories = cats || [];
+// ── Data ──
+function monthKey(y,m){return `${y}-${String(m+1).padStart(2,'0')}`;}
+function getExp(catId,y,m){const mk=monthKey(y,m);return(state.expenses[mk]&&state.expenses[mk][catId])||[];}
+function catTotal(catId,y,m){return getExp(catId,y,m).reduce((s,e)=>s+(parseFloat(e.amount)||0),0);}
+function monthTotal(y,m){return state.categories.reduce((s,c)=>s+catTotal(c.id,y,m),0);}
+function fmt(n){return n?'$'+parseFloat(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','):'--';}
+function fmtV(n){return '$'+parseFloat(n||0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function todayStr(){const d=new Date();return `${MONTHS[d.getMonth()]} ${d.getDate()}`;}
+function cc(idx){return idx%13;}
 
-  // Load expenses for current year
-  const { data: exps, error: expErr } = await sbClient
-    .from('expenses')
-    .select('*')
-    .gte('month_key', `${state.year}-01`)
-    .lte('month_key', `${state.year}-12`);
-  if (expErr) { toast('Error loading expenses'); return; }
-
-  // Index expenses
-  state.expenses = {};
-  (exps || []).forEach(e => {
-    if (!state.expenses[e.month_key]) state.expenses[e.month_key] = {};
-    if (!state.expenses[e.month_key][e.category_id]) state.expenses[e.month_key][e.category_id] = [];
+async function loadAll(){
+  document.getElementById('content').innerHTML='<div class="loading">Loading&#8230;</div>';
+  const uid=currentUser.id;
+  const {data:cats}=await sbClient.from('categories').select('*').eq('user_id',uid).order('position');
+  state.categories=cats||[];
+  const {data:exps}=await sbClient.from('expenses').select('*').eq('user_id',uid)
+    .gte('month_key',`${state.year}-01`).lte('month_key',`${state.year}-12`);
+  state.expenses={};
+  (exps||[]).forEach(e=>{
+    if(!state.expenses[e.month_key])state.expenses[e.month_key]={};
+    if(!state.expenses[e.month_key][e.category_id])state.expenses[e.month_key][e.category_id]=[];
     state.expenses[e.month_key][e.category_id].push(e);
   });
-
   refresh();
 }
 
-function monthKey(y, m) { return `${y}-${String(m+1).padStart(2,'0')}`; }
-function getExp(catId, y, m) { const mk = monthKey(y,m); return (state.expenses[mk] && state.expenses[mk][catId]) || []; }
-function catTotal(catId, y, m) { return getExp(catId,y,m).reduce((s,e) => s+(parseFloat(e.amount)||0), 0); }
-function monthTotal(y, m) { return state.categories.reduce((s,c) => s+catTotal(c.id,y,m), 0); }
-function fmt(n) { return n ? '$'+parseFloat(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',') : '—'; }
-function fmtV(n) { return '$'+parseFloat(n||0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','); }
-function catColorIdx(ci) { return ci % CAT_COLORS; }
-function todayStr() { const d=new Date(); return `${MONTHS[d.getMonth()]} ${d.getDate()}`; }
+// ── Render ──
+function refresh(){renderSummary();state.view==='year'?renderYear():renderMonth();}
 
-// ── Render ────────────────────────────────────────────────────────────────────
-function refresh() {
-  renderSummary();
-  if (state.view === 'year') renderYear();
-  else renderMonth();
+function renderSummary(){
+  const {year:y,month:m,view}=state;
+  const total=view==='year'?MONTHS.reduce((s,_,mi)=>s+monthTotal(y,mi),0):monthTotal(y,m);
+  const label=view==='year'?`${y} total`:`${MONTHS[m]} ${y} total`;
+  const entries=view==='year'
+    ?Object.values(state.expenses).reduce((s,mk)=>s+Object.values(mk).reduce((s2,a)=>s2+a.length,0),0)
+    :state.categories.reduce((s,c)=>s+getExp(c.id,y,m).length,0);
+  document.getElementById('summary-row').innerHTML=`
+    <div class="sum-card"><div class="lbl">${label}</div><div class="val">${fmtV(total)}</div></div>
+    <div class="sum-card"><div class="lbl">Categories</div><div class="val">${state.categories.length}</div></div>
+    <div class="sum-card"><div class="lbl">Entries</div><div class="val">${entries}</div></div>`;
 }
 
-function renderSummary() {
-  const { year: y, month: m, view } = state;
-  if (view === 'year') {
-    const total = MONTHS.reduce((s,_,mi) => s + monthTotal(y,mi), 0);
-    const entries = Object.values(state.expenses).reduce((s, mk) =>
-      s + Object.values(mk).reduce((s2, arr) => s2+arr.length, 0), 0);
-    document.getElementById('summary-row').innerHTML = `
-      <div class="sum-card"><div class="lbl">Year total</div><div class="val">${fmtV(total)}</div></div>
-      <div class="sum-card"><div class="lbl">Categories</div><div class="val">${state.categories.length}</div></div>
-      <div class="sum-card"><div class="lbl">Entries</div><div class="val">${entries}</div></div>`;
-  } else {
-    const total = monthTotal(y, m);
-    const entries = state.categories.reduce((s,c) => s+getExp(c.id,y,m).length, 0);
-    document.getElementById('summary-row').innerHTML = `
-      <div class="sum-card"><div class="lbl">${MONTHS[m]} ${y} total</div><div class="val">${fmtV(total)}</div></div>
-      <div class="sum-card"><div class="lbl">Categories</div><div class="val">${state.categories.length}</div></div>
-      <div class="sum-card"><div class="lbl">Entries</div><div class="val">${entries}</div></div>`;
-  }
-}
-
-function renderYear() {
-  const y = state.year;
-  let html = `<div class="year-wrap"><table class="year-table"><thead><tr>
-    <th class="sticky-col">Category</th>
-    ${MONTHS.map(mo => `<th>${mo}</th>`).join('')}
-    <th>Total</th>
+function renderYear(){
+  const y=state.year;
+  if(!state.categories.length){document.getElementById('content').innerHTML='<div class="no-cats">No categories yet -- click <strong>+ Category</strong> to get started.</div>';return;}
+  let html=`<div class="year-wrap"><table class="year-table"><thead><tr>
+    <th class="sc">Category</th>${MONTHS.map(mo=>`<th>${mo}</th>`).join('')}<th>Total</th>
   </tr></thead><tbody>`;
-
-  state.categories.forEach((cat, ci) => {
-    const ci_color = catColorIdx(ci);
-    const vals = MONTHS.map((_,mi) => catTotal(cat.id, y, mi));
-    const nonZero = vals.filter(v=>v>0);
-    const max = nonZero.length ? Math.max(...nonZero) : null;
-    const min = nonZero.length > 1 ? Math.min(...nonZero) : null;
-    const rowTotal = vals.reduce((s,v)=>s+v,0);
-
-    html += `<tr>
-      <td class="sticky-col">
-        <span class="cat-dot" style="background:var(--cat-${ci_color}-bar)"></span>${cat.name}
-      </td>`;
-    vals.forEach(v => {
-      let cls = 'zero';
-      if (v > 0) { cls = ''; if (v===max && nonZero.length>1) cls='heat-hi'; else if (v===min && nonZero.length>1) cls='heat-lo'; }
-      html += `<td class="${cls}">${v>0?fmt(v):'—'}</td>`;
+  state.categories.forEach((cat,idx)=>{
+    const c=cc(idx),vals=MONTHS.map((_,mi)=>catTotal(cat.id,y,mi));
+    const nz=vals.filter(v=>v>0),max=nz.length?Math.max(...nz):null,min=nz.length>1?Math.min(...nz):null;
+    const rt=vals.reduce((s,v)=>s+v,0);
+    html+=`<tr><td class="sc"><span class="cat-dot" style="background:var(--cat-${c}b)"></span>${cat.name}</td>`;
+    vals.forEach(v=>{
+      let cls=v===0?'zero':'';
+      if(v>0&&nz.length>1){if(v===max)cls='heat-hi';else if(v===min)cls='heat-lo';}
+      html+=`<td class="${cls}">${v>0?fmt(v):'--'}</td>`;
     });
-    html += `<td style="font-weight:600">${fmtV(rowTotal)}</td></tr>`;
+    html+=`<td style="font-weight:600">${fmtV(rt)}</td></tr>`;
   });
-
-  // Month totals row
-  const mTotals = MONTHS.map((_,mi) => monthTotal(y,mi));
-  const yTotal = mTotals.reduce((s,v)=>s+v,0);
-  html += `<tr class="total-row">
-    <td class="sticky-col">Month total</td>
-    ${mTotals.map(v=>`<td>${fmtV(v)}</td>`).join('')}
-    <td>${fmtV(yTotal)}</td>
-  </tr>`;
-
-  html += `</tbody></table></div>
-  <div class="legend">
-    <span>Heat map:</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:#d4f4e5"></span>Highest month</span>
-    <span class="legend-item"><span class="legend-swatch" style="background:#fde8e8"></span>Lowest month</span>
+  const mT=MONTHS.map((_,mi)=>monthTotal(y,mi));
+  html+=`<tr class="total-row"><td class="sc">Month total</td>${mT.map(v=>`<td>${fmtV(v)}</td>`).join('')}<td>${fmtV(mT.reduce((s,v)=>s+v,0))}</td></tr>`;
+  html+=`</tbody></table></div>
+  <div class="legend">Heat map:
+    <span><span class="legend-swatch" style="background:#d4f4e5"></span>Highest month</span>
+    <span><span class="legend-swatch" style="background:#fde8e8"></span>Lowest month</span>
   </div>`;
-
-  document.getElementById('content').innerHTML = html;
+  document.getElementById('content').innerHTML=html;
 }
 
-function renderMonth() {
-  const { year: y, month: m } = state;
-  let html = '';
-
-  state.categories.forEach((cat, ci) => {
-    const ci_color = catColorIdx(ci);
-    const isCollapsed = state.collapsed[cat.id];
-    const exps = getExp(cat.id, y, m);
-    const total = catTotal(cat.id, y, m);
-
-    html += `<div class="section${isCollapsed?' collapsed':''}">
-      <div class="section-header" onclick="toggleCat('${cat.id}')"
-           style="border-left-color:var(--cat-${ci_color}-bar)">
-        <div class="left">
-          <span class="cat-badge" style="background:var(--cat-${ci_color});color:var(--cat-${ci_color}-text)">${cat.name}</span>
+function renderMonth(){
+  const {year:y,month:m}=state;
+  if(!state.categories.length){document.getElementById('content').innerHTML='<div class="no-cats">No categories yet -- click <strong>+ Category</strong> to get started.</div>';return;}
+  let html='';
+  state.categories.forEach((cat,idx)=>{
+    const c=cc(idx),isC=state.collapsed[cat.id],exps=getExp(cat.id,y,m),total=catTotal(cat.id,y,m);
+    html+=`<div class="section${isC?' collapsed':''}">
+      <div class="section-header" onclick="toggleCat('${cat.id}')" style="border-left-color:var(--cat-${c}b)">
+        <div class="sh-left">
+          <span class="cat-badge" style="background:var(--cat-${c});color:var(--cat-${c}t)">${cat.name}</span>
           <span class="meta">${exps.length} item${exps.length!==1?'s':''}</span>
         </div>
-        <div class="right">
+        <div class="sh-right">
           <span class="cat-total">${fmtV(total)}</span>
-          <button class="del-cat-btn" onclick="event.stopPropagation();deleteCat('${cat.id}','${cat.name}')" title="Delete category">✕</button>
-          <span class="chevron">▾</span>
+          <button class="del-cat-btn" onclick="event.stopPropagation();deleteCat('${cat.id}','${cat.name.replace(/'/g,"\\'")}')">&#10005;</button>
+          <span class="chevron">&#9660;</span>
         </div>
       </div>`;
-
-    if (!isCollapsed) {
-      html += `<table class="entries">
-        <thead><tr><th class="td-date">Date</th><th>Note</th><th class="td-amt" style="text-align:right">Amount</th><th class="td-del"></th></tr></thead>
-        <tbody>`;
-      if (!exps.length) {
-        html += `<tr><td colspan="4" class="empty-row">No entries yet — add one below.</td></tr>`;
-      } else {
-        exps.forEach(exp => {
-          html += `<tr>
-            <td class="td-date">${exp.date_label||'—'}</td>
-            <td class="td-note">${exp.note||''}</td>
-            <td class="td-amt">${fmtV(exp.amount)}</td>
-            <td class="td-del"><button class="del-exp-btn" onclick="deleteExp('${exp.id}','${cat.id}')">✕</button></td>
-          </tr>`;
-        });
-      }
-      html += `</tbody></table>
-      <div class="add-row" data-cat="${cat.id}">
+    if(!isC){
+      html+=`<table class="entries"><thead><tr><th class="td-date">Date</th><th>Note</th><th class="td-amt" style="text-align:right">Amount</th><th class="td-del"></th></tr></thead><tbody>`;
+      if(!exps.length)html+=`<tr><td colspan="4" class="empty-row">No entries yet -- add one below.</td></tr>`;
+      else exps.forEach(exp=>{html+=`<tr>
+        <td class="td-date">${exp.date_label||'--'}</td>
+        <td class="td-note">${exp.note||''}</td>
+        <td class="td-amt">${fmtV(exp.amount)}</td>
+        <td class="td-del"><button class="del-exp-btn" onclick="deleteExp('${exp.id}','${cat.id}')">&#10005;</button></td>
+      </tr>`;});
+      html+=`</tbody></table>
+      <div class="add-row">
         <input class="inp-date" type="text" data-cat="${cat.id}" value="${todayStr()}" placeholder="Date" />
         <input class="inp-note" type="text" data-cat="${cat.id}" placeholder="Note (optional)" />
         <input class="inp-amt" type="number" data-cat="${cat.id}" placeholder="Amount" min="0" step="0.01" />
         <button class="btn primary" onclick="addExpense('${cat.id}')">Add</button>
       </div>`;
     }
-    html += `</div>`;
+    html+=`</div>`;
   });
-
-  if (!state.categories.length) {
-    html = `<div style="text-align:center;padding:60px 20px;color:var(--text-3)">No categories yet. Click <strong>+ Category</strong> to get started.</div>`;
-  }
-
-  document.getElementById('content').innerHTML = html;
-
-  // Enter key on amount field
-  document.querySelectorAll('.inp-amt').forEach(inp => {
-    inp.addEventListener('keydown', e => { if (e.key==='Enter') addExpense(inp.dataset.cat); });
-  });
+  document.getElementById('content').innerHTML=html;
+  document.querySelectorAll('.inp-amt').forEach(inp=>{inp.addEventListener('keydown',e=>{if(e.key==='Enter')addExpense(inp.dataset.cat);});});
 }
 
-// ── Actions ───────────────────────────────────────────────────────────────────
-function switchView(v) {
-  state.view = v;
-  document.getElementById('tab-year').className = 'tab' + (v==='year'?' active':'');
-  document.getElementById('tab-month').className = 'tab' + (v==='month'?' active':'');
-  document.getElementById('sel-month').style.display = v==='month'?'':'none';
+// ── Actions ──
+function switchView(v){
+  state.view=v;
+  document.getElementById('tab-year').className='tab'+(v==='year'?' active':'');
+  document.getElementById('tab-month').className='tab'+(v==='month'?' active':'');
+  document.getElementById('sel-month').style.display=v==='month'?'':'none';
   refresh();
 }
+function toggleCat(catId){state.collapsed[catId]=!state.collapsed[catId];renderMonth();}
 
-function toggleCat(catId) { state.collapsed[catId] = !state.collapsed[catId]; renderMonth(); }
-
-function openAddCat() {
-  document.getElementById('modal-title').textContent = 'Add category';
-  document.getElementById('modal-body').innerHTML = `
-    <label style="font-size:12px;color:var(--text-2);display:block;margin-bottom:4px;margin-top:12px;font-weight:500">Category name</label>
-    <input type="text" id="new-cat-name" placeholder="e.g. Groceries" style="width:100%" />`;
-  document.getElementById('modal-actions').innerHTML = `
-    <button class="btn" onclick="closeModal()">Cancel</button>
-    <button class="btn primary" onclick="addCategory()">Add</button>`;
-  document.getElementById('modal').style.display = 'block';
-  setTimeout(() => document.getElementById('new-cat-name').focus(), 50);
-  document.getElementById('new-cat-name').addEventListener('keydown', e => { if (e.key==='Enter') addCategory(); });
+function openAddCat(){
+  document.getElementById('modal-title').textContent='Add category';
+  document.getElementById('modal-body').innerHTML=`<label>Category name</label><input type="text" id="new-cat-name" placeholder="e.g. Groceries" />`;
+  document.getElementById('modal-actions').innerHTML=`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="addCategory()">Add</button>`;
+  document.getElementById('modal').style.display='block';
+  setTimeout(()=>document.getElementById('new-cat-name').focus(),50);
+  document.getElementById('new-cat-name').addEventListener('keydown',e=>{if(e.key==='Enter')addCategory();});
 }
 
-async function addCategory() {
-  const name = document.getElementById('new-cat-name').value.trim();
-  if (!name) return;
-  const position = state.categories.length;
-  const { data, error } = await sbClient.from('categories').insert({ name, position }).select().single();
-  if (error) { toast('Error adding category'); return; }
-  state.categories.push(data);
-  closeModal();
-  refresh();
-  toast(`Category "${name}" added`);
+async function addCategory(){
+  const name=document.getElementById('new-cat-name').value.trim();
+  if(!name)return;
+  const {data,error}=await sbClient.from('categories').insert({name,position:state.categories.length,user_id:currentUser.id}).select().single();
+  if(error){toast('Error adding category');return;}
+  state.categories.push(data);closeModal();refresh();toast(`"${name}" added`);
 }
 
-async function deleteCat(id, name) {
-  if (!confirm(`Delete "${name}"? All its expenses will also be removed.`)) return;
-  await sbClient.from('expenses').delete().eq('category_id', id);
-  await sbClient.from('categories').delete().eq('id', id);
-  state.categories = state.categories.filter(c => c.id !== id);
-  // Remove from local expenses
-  Object.keys(state.expenses).forEach(mk => { delete state.expenses[mk][id]; });
-  refresh();
-  toast(`"${name}" deleted`);
+async function deleteCat(id,name){
+  if(!confirm(`Delete "${name}"? All its expenses will be removed.`))return;
+  await sbClient.from('expenses').delete().eq('category_id',id).eq('user_id',currentUser.id);
+  await sbClient.from('categories').delete().eq('id',id).eq('user_id',currentUser.id);
+  state.categories=state.categories.filter(c=>c.id!==id);
+  Object.keys(state.expenses).forEach(mk=>{delete state.expenses[mk][id];});
+  refresh();toast(`"${name}" deleted`);
 }
 
-async function addExpense(catId) {
-  const date = document.querySelector(`.inp-date[data-cat="${catId}"]`).value.trim();
-  const note = document.querySelector(`.inp-note[data-cat="${catId}"]`).value.trim();
-  const amtEl = document.querySelector(`.inp-amt[data-cat="${catId}"]`);
-  const amount = parseFloat(amtEl.value);
-
-  if (!date || isNaN(amount) || amount <= 0) {
-    amtEl.style.borderColor = '#e74c3c';
-    setTimeout(() => amtEl.style.borderColor = '', 1500);
-    return;
-  }
-
-  const mk = monthKey(state.year, state.month);
-  const { data, error } = await sbClient.from('expenses').insert({
-    category_id: catId,
-    month_key: mk,
-    date_label: date,
-    note: note || null,
-    amount
-  }).select().single();
-
-  if (error) { toast('Error saving expense'); return; }
-
-  if (!state.expenses[mk]) state.expenses[mk] = {};
-  if (!state.expenses[mk][catId]) state.expenses[mk][catId] = [];
+async function addExpense(catId){
+  const date=document.querySelector(`.inp-date[data-cat="${catId}"]`).value.trim();
+  const note=document.querySelector(`.inp-note[data-cat="${catId}"]`).value.trim();
+  const amtEl=document.querySelector(`.inp-amt[data-cat="${catId}"]`);
+  const amount=parseFloat(amtEl.value);
+  if(!date||isNaN(amount)||amount<=0){amtEl.style.borderColor='#e74c3c';setTimeout(()=>amtEl.style.borderColor='',1500);return;}
+  const mk=monthKey(state.year,state.month);
+  const {data,error}=await sbClient.from('expenses').insert({category_id:catId,month_key:mk,date_label:date,note:note||null,amount,user_id:currentUser.id}).select().single();
+  if(error){toast('Error saving');return;}
+  if(!state.expenses[mk])state.expenses[mk]={};
+  if(!state.expenses[mk][catId])state.expenses[mk][catId]=[];
   state.expenses[mk][catId].push(data);
-
-  amtEl.value = '';
-  document.querySelector(`.inp-note[data-cat="${catId}"]`).value = '';
+  amtEl.value='';document.querySelector(`.inp-note[data-cat="${catId}"]`).value='';
   refresh();
 }
 
-async function deleteExp(expId, catId) {
-  const { error } = await sbClient.from('expenses').delete().eq('id', expId);
-  if (error) { toast('Error deleting entry'); return; }
-  Object.keys(state.expenses).forEach(mk => {
-    if (state.expenses[mk][catId]) {
-      state.expenses[mk][catId] = state.expenses[mk][catId].filter(e => e.id !== expId);
-    }
-  });
+async function deleteExp(expId,catId){
+  const {error}=await sbClient.from('expenses').delete().eq('id',expId).eq('user_id',currentUser.id);
+  if(error){toast('Error deleting');return;}
+  Object.keys(state.expenses).forEach(mk=>{if(state.expenses[mk][catId])state.expenses[mk][catId]=state.expenses[mk][catId].filter(e=>e.id!==expId);});
   refresh();
 }
 
-function closeModal() { document.getElementById('modal').style.display = 'none'; }
-
-function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2500);
-}
+function closeModal(){document.getElementById('modal').style.display='none';}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2500);}
 </script>
 </body>
 </html>
