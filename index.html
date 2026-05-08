@@ -305,7 +305,7 @@
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const CAT_COLORS = 13; // number of color slots
 
-let supabase = null;
+let sbClient = null;
 let state = {
   view: 'year',
   year: new Date().getFullYear(),
@@ -340,7 +340,7 @@ function showConfig() {
 
 async function initSupabase(url, key) {
   try {
-    supabase = window.supabase.createClient(url, key);
+    sbClient = window.supabase.createClient(url, key);
     document.getElementById('config-screen').style.display = 'none';
     document.getElementById('main-app').style.display = 'block';
     await loadAll();
@@ -386,12 +386,12 @@ window.addEventListener('DOMContentLoaded', () => {
 async function loadAll() {
   document.getElementById('content').innerHTML = '<div class="loading">Loading…</div>';
   // Load categories
-  const { data: cats, error: catErr } = await supabase.from('categories').select('*').order('position');
+  const { data: cats, error: catErr } = await sbClient.from('categories').select('*').order('position');
   if (catErr) { toast('Error loading categories'); return; }
   state.categories = cats || [];
 
   // Load expenses for current year
-  const { data: exps, error: expErr } = await supabase
+  const { data: exps, error: expErr } = await sbClient
     .from('expenses')
     .select('*')
     .gte('month_key', `${state.year}-01`)
@@ -583,7 +583,7 @@ async function addCategory() {
   const name = document.getElementById('new-cat-name').value.trim();
   if (!name) return;
   const position = state.categories.length;
-  const { data, error } = await supabase.from('categories').insert({ name, position }).select().single();
+  const { data, error } = await sbClient.from('categories').insert({ name, position }).select().single();
   if (error) { toast('Error adding category'); return; }
   state.categories.push(data);
   closeModal();
@@ -593,8 +593,8 @@ async function addCategory() {
 
 async function deleteCat(id, name) {
   if (!confirm(`Delete "${name}"? All its expenses will also be removed.`)) return;
-  await supabase.from('expenses').delete().eq('category_id', id);
-  await supabase.from('categories').delete().eq('id', id);
+  await sbClient.from('expenses').delete().eq('category_id', id);
+  await sbClient.from('categories').delete().eq('id', id);
   state.categories = state.categories.filter(c => c.id !== id);
   // Remove from local expenses
   Object.keys(state.expenses).forEach(mk => { delete state.expenses[mk][id]; });
@@ -615,7 +615,7 @@ async function addExpense(catId) {
   }
 
   const mk = monthKey(state.year, state.month);
-  const { data, error } = await supabase.from('expenses').insert({
+  const { data, error } = await sbClient.from('expenses').insert({
     category_id: catId,
     month_key: mk,
     date_label: date,
@@ -635,7 +635,7 @@ async function addExpense(catId) {
 }
 
 async function deleteExp(expId, catId) {
-  const { error } = await supabase.from('expenses').delete().eq('id', expId);
+  const { error } = await sbClient.from('expenses').delete().eq('id', expId);
   if (error) { toast('Error deleting entry'); return; }
   Object.keys(state.expenses).forEach(mk => {
     if (state.expenses[mk][catId]) {
